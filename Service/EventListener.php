@@ -46,6 +46,7 @@ class EventListener
     {
         $log = new Log();
         $log->setTarget($event->getTargetIdentifier())
+            ->setNamespace($this->getNamespace($event))
             ->setAction($this->getAction($event))
             ->setUser($this->getUser());
 
