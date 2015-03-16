@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class EventListener
 {
     /**
-     * @var array actionMap array('eventName'=>'action')
+     * @var array actionMap array('eventName'=>array('action'=>'foo', 'namespace'=>'bar')
      */
     protected $actionMap;
 
@@ -79,6 +79,16 @@ class EventListener
      */
     protected function getAction(TrackableEventInterface $event)
     {
-        return $this->actionMap[$event->getName()];
+        return $this->actionMap[$event->getName()]['action'];
+    }
+
+    /**
+     * @param TrackableEventInterface $event
+     *
+     * @return string
+     */
+    protected function getNamespace(TrackableEventInterface $event)
+    {
+        return $this->actionMap[$event->getName()]['namespace'];
     }
 }

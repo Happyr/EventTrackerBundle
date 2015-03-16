@@ -7,6 +7,8 @@ Happyr\EventTrackerBundle\Entity\Log:
       columns: [ target ]
     user_index:
       columns: [ user ]
+    namespace_index:
+      columns: [ namespace ]
   id:
     id:
       type: integer
@@ -20,6 +22,9 @@ Happyr\EventTrackerBundle\Entity\Log:
       length: 255
       nullable: true
     action:
+      type: string
+      length: 50
+    namespace:
       type: string
       length: 50
     time:

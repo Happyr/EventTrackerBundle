@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
             ->prototype('array')
             ->children()
                 ->scalarNode('action')->isRequired()->end()
+                ->scalarNode('namespace')->isRequired()->end()
                 ->booleanNode('save_user')->defaultTrue()->end()
             ->end()
         ->end();

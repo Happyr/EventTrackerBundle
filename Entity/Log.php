@@ -25,6 +25,11 @@ class Log
     protected $action;
 
     /**
+     * @var string namespace
+     */
+    protected $namespace;
+
+    /**
      * @var string targetId
      */
     protected $user;
@@ -123,5 +128,25 @@ class Log
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param string $namespace
+     *
+     * @return $this
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 }
