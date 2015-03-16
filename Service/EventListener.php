@@ -5,7 +5,6 @@ namespace Happyr\EventTrackerBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Happyr\EventTrackerBundle\Entity\Log;
 use Happyr\EventTrackerBundle\Event\TrackableEventInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
