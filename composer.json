@@ -1,0 +1,26 @@
+{
+    "name": "happyr/google-site-authenticator-bundle",
+    "type": "symfony-bundle",
+    "description": "Authenticate your website (not your users) with Google API. Can be used instead as Domain-Wide Delegation of Authority",
+    "keywords": ["Domain-Wide Delegation", "Authentication", "Google", "Site-wide", "Domain-Wide", "API"],
+    "homepage": "http://developer.happyr.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias@happyr.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "doctrine/doctrine-cache-bundle": "~1.0",
+        "google/apiclient": "~1.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Happyr\\EventTrackerBundle\\": ""
+        }
+    },
+    "target-dir": "Happyr/EventTrackerBundle"
+}
+

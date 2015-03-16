@@ -1,0 +1,21 @@
+Happyr\EventTrackerBundle\Entity\Log:
+  type: entity
+  table: happyr_event_tracker
+  repositoryClass: Happyr\EventTrackerBundle\Entity\LogRepository
+
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    target:
+      type: string
+      length: 255
+    user:
+      type: string
+      length: 255
+    action:
+      type: string
+      length: 50
+    time:
+      type: datetime

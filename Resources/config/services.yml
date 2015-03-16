@@ -1,0 +1,9 @@
+parameters:
+
+services:
+  happyr.event_tracker.event_listener:
+    class: Happyr\EventTrackerBundle\Service\EventListener
+    arguments:
+      - @doctrine.orm.entity_manager
+      - @security.context
+      - []
