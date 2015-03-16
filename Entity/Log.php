@@ -2,9 +2,6 @@
 
 namespace Happyr\EventTrackerBundle\Entity;
 
-/**
-
- */
 class Log
 {
     /**
