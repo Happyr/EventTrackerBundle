@@ -26,7 +26,7 @@ class HappyrEventTrackerExtension extends Extension
         $eventMap = array();
         foreach ($config['events'] as $name => $event) {
             $listener->addTag('kernel.event_listener', array('event' => $name, 'method' => 'createLog'));
-            $eventMap[$name] = array('action'=>$event['action'], 'namespace'=>$event['namespace']);
+            $eventMap[$name] = array('action' => $event['action'], 'namespace' => $event['namespace']);
         }
 
         //add the event map to the listener

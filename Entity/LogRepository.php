@@ -18,7 +18,7 @@ class LogRepository extends EntityRepository
      */
     public function getEventsByTarget($namespace, $target, $action = null)
     {
-        $criteria = array('namespace'=>$namespace, 'target' => $target);
+        $criteria = array('namespace' => $namespace, 'target' => $target);
 
         if ($action !== null) {
             $criteria['action'] = $action;
@@ -50,4 +50,4 @@ class LogRepository extends EntityRepository
 
         return $this->findBy($criteria);
     }
-} 
+}

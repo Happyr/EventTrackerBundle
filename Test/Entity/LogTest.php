@@ -14,4 +14,4 @@ class LogTest extends \PHPUnit_Framework_TestCase
         $log = new Log();
         $this->assertNotNull($log->getTime(), 'A timestamp should be created with the Log');
     }
-} 
+}
