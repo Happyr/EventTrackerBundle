@@ -42,6 +42,15 @@ class Log
         $this->time = new \DateTime();
     }
 
+    public function __toString()
+    {
+        if ($this->user === null) {
+            return '';
+        }
+
+        return (string) $this->user;
+    }
+
     /**
      * @param string $action
      *
