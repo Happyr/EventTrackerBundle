@@ -16,7 +16,7 @@
     <formatter type="clover" usefile="false"/>
     <testsuites>
         <testsuite name="Happyr Test Suite">
-            <directory>./Tests</directory>
+            <directory>./Test</directory>
         </testsuite>
     </testsuites>
 
@@ -25,13 +25,11 @@
             <directory suffix=".php">./</directory>
             <exclude>
                 <directory>vendor</directory>
-                <directory>Tests</directory>
+                <directory>Test</directory>
             </exclude>
         </whitelist>
     </filter>
 
     <logging>
-        <log type="coverage-clover" target="build/logs/phpunit.coverage.xml"/>
-        <log type="junit" target="build/logs/phpunit.xml" logIncompleteSkipped="false"/>
     </logging>
 </phpunit>
