@@ -2,7 +2,11 @@ Happyr\EventTrackerBundle\Entity\Log:
   type: entity
   table: happyr_event_tracker
   repositoryClass: Happyr\EventTrackerBundle\Entity\LogRepository
-
+  indexes:
+    target_index:
+      columns: [ target ]
+    user_index:
+      columns: [ user ]
   id:
     id:
       type: integer
@@ -14,6 +18,7 @@ Happyr\EventTrackerBundle\Entity\Log:
     user:
       type: string
       length: 255
+      nullable: true
     action:
       type: string
       length: 50

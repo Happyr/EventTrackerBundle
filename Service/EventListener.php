@@ -4,7 +4,7 @@ namespace Happyr\EventTrackerBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Happyr\EventTrackerBundle\Entity\Log;
-use Happyr\EventTrackerBundle\Event\TrackableEvent;
+use Happyr\EventTrackerBundle\Event\TrackableEventInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -41,9 +41,9 @@ class EventListener
     }
 
     /**
-     * @param TrackableEvent $event
+     * @param TrackableEventInterface $event
      */
-    public function createLog(TrackableEvent $event)
+    public function createLog(TrackableEventInterface $event)
     {
         $log = new Log();
         $log->setTarget($event->getTargetIdentifier())
@@ -57,7 +57,7 @@ class EventListener
     /**
      * Get the user.
      *
-     * @return mixed user
+     * @return string user
      */
     protected function getUser()
     {
@@ -69,15 +69,15 @@ class EventListener
             return;
         }
 
-        return $user;
+        return $user->getUsername();
     }
 
     /**
-     * @param TrackableEvent $event
+     * @param TrackableEventInterface $event
      *
-     * @return mixed
+     * @return string
      */
-    protected function getAction(Event $event)
+    protected function getAction(TrackableEventInterface $event)
     {
         return $this->actionMap[$event->getName()];
     }

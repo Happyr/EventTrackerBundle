@@ -34,7 +34,6 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->root('events');
         $node
             ->isRequired()
-            ->requiresAtLeastOneElement()
             ->useAttributeAsKey('event')
             ->prototype('array')
             ->children()
