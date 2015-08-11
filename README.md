@@ -25,3 +25,12 @@ happyr_event_tracker:
         namespace: comment
         action: created
 ```
+
+Your user entity need to extend EventUserInterface and you need to make sure doctrine recognize the mapping:
+
+``` yml
+doctrine:
+  orm:
+    resolve_target_entities:
+      Happyr\EventTrackerBundle\Entity\EventUserInterface: Acme\UserBundle\Entity\User
+```

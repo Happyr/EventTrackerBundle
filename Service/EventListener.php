@@ -2,10 +2,11 @@
 
 namespace Happyr\EventTrackerBundle\Service;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Happyr\EventTrackerBundle\Entity\EventUserInterface;
 use Happyr\EventTrackerBundle\Entity\Log;
 use Happyr\EventTrackerBundle\Event\TrackableEventInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * @author Tobias Nyholm
@@ -23,20 +24,20 @@ class EventListener
     protected $em;
 
     /**
-     * @var SecurityContextInterface securityContext
+     * @var TokenStorage tokenStorage
      */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
-     * @param EntityManager            $em
-     * @param SecurityContextInterface $securityContext
-     * @param array                    $actionMap
+     * @param EntityManagerInterface $em
+     * @param TokenStorage           $tokenStorage
+     * @param array                  $actionMap
      */
-    public function __construct(EntityManager $em, SecurityContextInterface $securityContext, array $actionMap = array())
+    public function __construct(EntityManagerInterface $em, TokenStorage $tokenStorage, array $actionMap = array())
     {
         $this->actionMap = $actionMap;
         $this->em = $em;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -48,20 +49,37 @@ class EventListener
         $log->setTarget($event->getTargetIdentifier())
             ->setNamespace($this->getNamespace($event))
             ->setAction($this->getAction($event))
-            ->setUser($this->getUser());
+            ->setUser($this->getUser($event));
 
         $this->em->persist($log);
         $this->em->flush($log);
     }
 
     /**
-     * Get the user.
+     * Get the user from the event or the token.
      *
-     * @return string user
+     * @return EventUserInterface|void
      */
-    protected function getUser()
+    protected function getUser(TrackableEventInterface $event)
     {
-        if (null === $token = $this->securityContext->getToken()) {
+        /*
+         * Try to get the user from the event
+         */
+        if (method_exists($event, 'getUser')) {
+            return $event->getUser();
+        }
+
+        /*
+         * Try to get the user id from the event
+         */
+        if (method_exists($event, 'getUserId')) {
+            return $this->em->getRepository('HappyrEventTrackerBundle:EventUserInterface')->findOneById($event->getUserId());
+        }
+
+        /*
+         * Try to get user form token
+         */
+        if (null === $token = $this->tokenStorage->getToken()) {
             return;
         }
 
@@ -69,7 +87,7 @@ class EventListener
             return;
         }
 
-        return $user->getUsername();
+        return $user;
     }
 
     /**

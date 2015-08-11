@@ -11,7 +11,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
 
         $root->children()
             ->append($this->getEventNode())
+            ->enumNode('manager')->values(array('database', 'aggressive'))->defaultValue('database')->end()
         ->end();
 
         return $treeBuilder;

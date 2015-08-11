@@ -5,7 +5,7 @@ namespace Happyr\EventTrackerBundle\Entity;
 class Log
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -30,7 +30,7 @@ class Log
     protected $namespace;
 
     /**
-     * @var string targetId
+     * @var EventUserInterface
      */
     protected $user;
 
@@ -120,11 +120,11 @@ class Log
     }
 
     /**
-     * @param string $user
+     * @param EventUserInterface $user
      *
      * @return $this
      */
-    public function setUser($user)
+    public function setUser(EventUserInterface $user)
     {
         $this->user = $user;
 
@@ -132,7 +132,7 @@ class Log
     }
 
     /**
-     * @return string
+     * @return EventUserInterface
      */
     public function getUser()
     {
