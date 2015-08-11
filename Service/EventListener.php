@@ -56,7 +56,7 @@ class EventListener
     }
 
     /**
-     * Get the user from the event or the token
+     * Get the user from the event or the token.
      *
      * @return EventUserInterface|void
      */
