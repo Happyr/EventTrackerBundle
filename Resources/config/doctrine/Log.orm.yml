@@ -9,6 +9,9 @@ Happyr\EventTrackerBundle\Entity\Log:
       columns: [ user ]
     namespace_index:
       columns: [ namespace ]
+  manyToOne:
+    user:
+      targetEntity: Happyr\EventTrackerBundle\Entity\EventUserInterface
   id:
     id:
       type: integer
@@ -17,10 +20,6 @@ Happyr\EventTrackerBundle\Entity\Log:
     target:
       type: string
       length: 255
-    user:
-      type: string
-      length: 255
-      nullable: true
     action:
       type: string
       length: 50

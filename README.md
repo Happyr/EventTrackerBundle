@@ -33,4 +33,4 @@ doctrine:
   orm:
     resolve_target_entities:
       Happyr\EventTrackerBundle\Entity\EventUserInterface: Acme\UserBundle\Entity\User
-``
+```
