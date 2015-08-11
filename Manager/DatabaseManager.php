@@ -25,10 +25,11 @@ class DatabaseManager extends EventTrackerManager
 
     /**
      * @param $target
+     * @param $action
      *
-     * @return Log
+     * @return Log|void
      */
-    public function actionedBy($target, $action)
+    public function getLog($target, $action)
     {
         $class = $this->getNamespace($target);
 

@@ -21,7 +21,7 @@ class AggressiveManager extends DatabaseManager
      *
      * @return Log|void
      */
-    public function actionedBy($target, $action)
+    public function getLog($target, $action)
     {
         $class = $this->getNamespace($target);
         $key = $this->getKey($target, $class);

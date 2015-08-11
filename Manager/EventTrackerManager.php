@@ -14,9 +14,30 @@ abstract class EventTrackerManager
      *
      * @return Log
      */
-    public function createdBy($target)
+    abstract public function getLog($target, $action);
+
+    /**
+     * @param $target
+     *
+     * @return Log
+     */
+    public function getCreatedLog($target)
     {
-        return $this->actionedBy($target, 'created');
+        return $this->getLog($target, 'created');
+    }
+
+    /**
+     * @param $target
+     *
+     * @return \Happyr\EventTrackerBundle\Entity\EventUserInterface|void
+     */
+    public function getCreator($target)
+    {
+        if (null === $log = $this->getCreatedLog($target)) {
+            return;
+        }
+
+        return $log->getUser();
     }
 
     /**
@@ -24,15 +45,8 @@ abstract class EventTrackerManager
      *
      * @return Log
      */
-    public function updatedBy($target)
+    public function getUpdatedLog($target)
     {
-        return $this->actionedBy($target, 'updated');
+        return $this->getLog($target, 'updated');
     }
-
-    /**
-     * @param $target
-     *
-     * @return Log
-     */
-    abstract public function actionedBy($target, $action);
 }

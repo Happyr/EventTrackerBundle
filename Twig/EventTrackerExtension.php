@@ -28,9 +28,9 @@ class EventTrackerExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('createdBy', array($this->etm, 'createdBy')),
-            new \Twig_SimpleFilter('updatedBy', array($this->etm, 'updatedBy')),
-            new \Twig_SimpleFilter('actionedBy', array($this->etm, 'actionedBy')),
+            new \Twig_SimpleFilter('createdBy', array($this->etm, 'getCreatedLog')),
+            new \Twig_SimpleFilter('updatedBy', array($this->etm, 'getUpdatedLog')),
+            new \Twig_SimpleFilter('actionedBy', array($this->etm, 'getLog')),
         );
     }
 
