@@ -31,5 +31,7 @@ class HappyrEventTrackerExtension extends Extension
 
         //add the event map to the listener
         $listener->replaceArgument(2, $eventMap);
+
+        $container->setAlias('happyr.event_tracker.manager', 'happyr.event_tracker.manager.'.$config['manager']);
     }
 }

@@ -5,7 +5,7 @@ namespace Happyr\EventTrackerBundle\Entity;
 class Log
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
