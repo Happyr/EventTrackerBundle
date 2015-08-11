@@ -45,8 +45,6 @@ class DatabaseManager extends EventTrackerManager
             return;
         }
 
-        $this->setUser($log);
-
         return $log;
     }
 
@@ -61,16 +59,5 @@ class DatabaseManager extends EventTrackerManager
         $class = strtolower(substr($fqn, strrpos($fqn, '\\') + 1));
 
         return $class;
-    }
-
-    /**
-     * @param $log
-     *
-     * @return mixed
-     */
-    protected function setUser(Log $log)
-    {
-        $user = $this->em->getRepository('CarlinUserUserBundle:User')->findOneByEmail($log->getUser());
-        $log->setUser($user);
     }
 }

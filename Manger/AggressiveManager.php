@@ -36,10 +36,6 @@ class AggressiveManager extends DatabaseManager
 
         $log = $this->storage[$key][$action];
 
-        if (is_string($log->getUser())) {
-            $this->setUser($log);
-        }
-
         return $log;
     }
 
