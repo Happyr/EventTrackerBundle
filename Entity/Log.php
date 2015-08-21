@@ -124,7 +124,7 @@ class Log
      *
      * @return $this
      */
-    public function setUser(EventUserInterface $user)
+    public function setUser(EventUserInterface $user = null)
     {
         $this->user = $user;
 
