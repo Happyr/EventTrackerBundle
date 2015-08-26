@@ -5,8 +5,6 @@ Happyr\EventTrackerBundle\Entity\Log:
   indexes:
     target_index:
       columns: [ target ]
-    user_index:
-      columns: [ user ]
     namespace_index:
       columns: [ namespace ]
   manyToOne:
