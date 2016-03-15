@@ -15,7 +15,7 @@ class Log
     protected $time;
 
     /**
-     * @var mixed targetId
+     * @var int targetId
      */
     protected $target;
 
@@ -80,7 +80,7 @@ class Log
     }
 
     /**
-     * @param mixed $target
+     * @param int $target
      *
      * @return $this
      */
@@ -92,7 +92,7 @@ class Log
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getTarget()
     {

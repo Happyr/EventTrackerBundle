@@ -16,8 +16,7 @@ Happyr\EventTrackerBundle\Entity\Log:
       generator: {strategy: AUTO}
   fields:
     target:
-      type: string
-      length: 255
+      type: integer
     action:
       type: string
       length: 50

@@ -7,5 +7,8 @@ namespace Happyr\EventTrackerBundle\Event;
  */
 interface TrackableEventInterface
 {
+    /**
+     * @return int
+     */
     public function getTargetIdentifier();
 }
