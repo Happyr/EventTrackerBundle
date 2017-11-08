@@ -4,22 +4,22 @@ services:
   happyr.event_tracker.event_listener:
     class: Happyr\EventTrackerBundle\Service\EventListener
     arguments:
-      - @doctrine.orm.entity_manager
-      - @security.token_storage
+      - "@doctrine.orm.entity_manager"
+      - "@security.token_storage"
       - []
 
   happyr.event_tracker.manager.aggressive:
     class: Happyr\EventTrackerBundle\Manager\AggressiveManager
     arguments:
-      - @doctrine.orm.entity_manager
+      - "@doctrine.orm.entity_manager"
 
   happyr.event_tracker.manager.database:
     class: Happyr\EventTrackerBundle\Manager\DatabaseManager
     arguments:
-      - @doctrine.orm.entity_manager
+      - "@doctrine.orm.entity_manager"
 
   happyr.event_tracker.twig:
     class: Happyr\EventTrackerBundle\Twig\EventTrackerExtension
-    arguments: [ @happyr.event_tracker.manager ]
+    arguments: [ "@happyr.event_tracker.manager" ]
     tags:
       - { name: twig.extension }
