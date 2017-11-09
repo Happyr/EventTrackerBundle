@@ -19,7 +19,7 @@ class EventListener
     protected $actionMap;
 
     /**
-     * @var \Doctrine\ORM\EntityManager em
+     * @var EntityManagerInterface em
      */
     protected $em;
 
