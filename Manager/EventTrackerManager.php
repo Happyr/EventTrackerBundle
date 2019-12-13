@@ -12,7 +12,7 @@ abstract class EventTrackerManager implements EventTrackerManagerInterface
     /**
      * @param mixed $target
      */
-    public function getCreatedLog($target): Log
+    public function getCreatedLog($target): ?Log
     {
         return $this->getLog($target, 'created');
     }
@@ -32,7 +32,7 @@ abstract class EventTrackerManager implements EventTrackerManagerInterface
     /**
      * @param mixed $target
      */
-    public function getUpdatedLog($target): Log
+    public function getUpdatedLog($target): ?Log
     {
         return $this->getLog($target, 'updated');
     }
@@ -42,7 +42,7 @@ abstract class EventTrackerManager implements EventTrackerManagerInterface
      *
      * @return string
      */
-    protected function getNamespace($target)
+    protected function getNamespace($target): string
     {
         $fqn = \get_class($target);
 

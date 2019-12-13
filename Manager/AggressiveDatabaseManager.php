@@ -44,7 +44,7 @@ final class AggressiveDatabaseManager extends EventTrackerManager
      *
      * @param mixed $target
      */
-    private function fetchFromDb($target, string $class)
+    private function fetchFromDb($target, string $class): void
     {
         $key = $this->getKey($target, $class);
 
