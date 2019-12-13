@@ -15,10 +15,15 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('happyr_event_tracker');
+        $treeBuilder = new TreeBuilder('happyr_event_tracker');
+        // Keep compatibility with symfony/config < 4.2
+        if (!\method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->root('happyr_event_tracker');
+        } else {
+            $rootNode = $treeBuilder->getRootNode();
+        }
 
-        $root->children()
+        $rootNode->children()
             ->append($this->getEventNode())
             ->enumNode('manager')->values(array('database', 'aggressive'))->defaultValue('database')->end()
         ->end();

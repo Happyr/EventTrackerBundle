@@ -2,26 +2,32 @@
 
 namespace Happyr\EventTrackerBundle\Manager;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Happyr\EventTrackerBundle\Entity\Log;
 
 /**
- * @author Tobias Nyholm
  * This manager fetches all the events related to the target and store them im a memory cache.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class AggressiveManager extends DatabaseManager
+final class AggressiveDatabaseManager extends EventTrackerManager
 {
     /**
      * @var array storage A storage with previous data that we fetched
      */
     private $storage;
 
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
-     * @param $target
-     * @param $action
-     *
-     * @return Log|void
+     * {@inheritdoc}
      */
-    public function getLog($target, $action)
+    public function getLog($target, string $action): ?Log
     {
         $class = $this->getNamespace($target);
         $key = $this->getKey($target, $class);
@@ -30,34 +36,25 @@ class AggressiveManager extends DatabaseManager
             $this->fetchFromDb($target, $class);
         }
 
-        if (!isset($this->storage[$key][$action])) {
-            return;
-        }
-
-        $log = $this->storage[$key][$action];
-
-        return $log;
+        return $this->storage[$key][$action] ?? null;
     }
 
     /**
      * fetch all actions on this target.
      *
-     * @param $target
-     * @param $class
-     *
-     * @return Log
+     * @param mixed $target
      */
-    private function fetchFromDb($target, $class)
+    private function fetchFromDb($target, string $class)
     {
         $key = $this->getKey($target, $class);
 
-        $logs = $this->em->getRepository('HappyrEventTrackerBundle:Log')
+        $logs = $this->em->getRepository(Log::class)
             ->findBy(
-                array(
+                [
                     'namespace' => $class,
                     'target' => $target->getId(),
-                ),
-                array('time' => 'DESC')
+                ],
+                ['time' => 'DESC']
             );
 
         foreach ($logs as $log) {
@@ -68,12 +65,9 @@ class AggressiveManager extends DatabaseManager
     }
 
     /**
-     * @param $target
      * @param $class
-     *
-     * @return string
      */
-    private function getKey($target, $class)
+    private function getKey($target, string $class): string
     {
         return $class.$target->getId();
     }

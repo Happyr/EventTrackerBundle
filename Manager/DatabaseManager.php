@@ -6,59 +6,37 @@ use Doctrine\ORM\EntityManagerInterface;
 use Happyr\EventTrackerBundle\Entity\Log;
 
 /**
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class DatabaseManager extends EventTrackerManager
+final class DatabaseManager extends EventTrackerManager
 {
-    /**
-     * @var EntityManagerInterface em
-     */
-    protected $em;
+    private $em;
 
-    /**
-     * @param EntityManagerInterface $em
-     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
 
     /**
-     * @param $target
-     * @param $action
-     *
-     * @return Log|void
+     * {@inheritdoc}
      */
-    public function getLog($target, $action)
+    public function getLog($target, string $action): ?Log
     {
         $class = $this->getNamespace($target);
 
-        if (null === $log = $this->em->getRepository('HappyrEventTrackerBundle:Log')
-                ->findOneBy(
-                    array(
+        if (null === $log = $this->em->getRepository(Log::class)
+            ->findOneBy(
+                    [
                         'namespace' => $class,
                         'target' => $target->getId(),
                         'action' => $action,
-                    ),
-                    array('time' => 'DESC')
+                    ],
+                    ['time' => 'DESC']
                 )
         ) {
-            return;
+            return null;
         }
 
         return $log;
-    }
-
-    /**
-     * @param $target
-     *
-     * @return string
-     */
-    protected function getNamespace($target)
-    {
-        $fqn = get_class($target);
-        $class = strtolower(substr($fqn, strrpos($fqn, '\\') + 1));
-
-        return $class;
     }
 }

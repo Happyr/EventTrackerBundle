@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Happyr\EventTrackerBundle\Entity\EventUserInterface;
 use Happyr\EventTrackerBundle\Entity\Log;
 use Happyr\EventTrackerBundle\Event\TrackableEventInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @author Tobias Nyholm
@@ -24,16 +24,11 @@ class EventListener
     protected $em;
 
     /**
-     * @var TokenStorage tokenStorage
+     * @var TokenStorageInterface tokenStorage
      */
     protected $tokenStorage;
-
-    /**
-     * @param EntityManagerInterface $em
-     * @param TokenStorage           $tokenStorage
-     * @param array                  $actionMap
-     */
-    public function __construct(EntityManagerInterface $em, TokenStorage $tokenStorage, array $actionMap = array())
+    
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, array $actionMap = array())
     {
         $this->actionMap = $actionMap;
         $this->em = $em;

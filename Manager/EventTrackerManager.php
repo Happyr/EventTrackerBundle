@@ -5,48 +5,47 @@ namespace Happyr\EventTrackerBundle\Manager;
 use Happyr\EventTrackerBundle\Entity\Log;
 
 /**
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-abstract class EventTrackerManager
+abstract class EventTrackerManager implements EventTrackerManagerInterface
 {
     /**
-     * @param $target
-     *
-     * @return Log
+     * @param mixed $target
      */
-    abstract public function getLog($target, $action);
-
-    /**
-     * @param $target
-     *
-     * @return Log
-     */
-    public function getCreatedLog($target)
+    public function getCreatedLog($target): Log
     {
         return $this->getLog($target, 'created');
     }
 
     /**
-     * @param $target
-     *
-     * @return \Happyr\EventTrackerBundle\Entity\EventUserInterface|void
+     * @param mixed $target
      */
-    public function getCreator($target)
+    public function getCreator($target): ?EventUserInterface
     {
         if (null === $log = $this->getCreatedLog($target)) {
-            return;
+            return null;
         }
 
         return $log->getUser();
     }
 
     /**
-     * @param $target
-     *
-     * @return Log
+     * @param mixed $target
      */
-    public function getUpdatedLog($target)
+    public function getUpdatedLog($target): Log
     {
         return $this->getLog($target, 'updated');
+    }
+
+    /**
+     * @param $target
+     *
+     * @return string
+     */
+    protected function getNamespace($target)
+    {
+        $fqn = \get_class($target);
+
+        return \mb_strtolower(\mb_substr($fqn, \mb_strrpos($fqn, '\\') + 1));
     }
 }

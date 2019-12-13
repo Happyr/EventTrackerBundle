@@ -2,6 +2,8 @@
 
 namespace Happyr\EventTrackerBundle\DependencyInjection;
 
+use Happyr\EventTrackerBundle\Manager\EventTrackerManagerInterface;
+use Happyr\EventTrackerBundle\Service\EventListener;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -21,7 +23,7 @@ class HappyrEventTrackerExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $listener = $container->getDefinition('happyr.event_tracker.event_listener');
+        $listener = $container->getDefinition(EventListener::class);
 
         $eventMap = array();
         foreach ($config['events'] as $name => $event) {
@@ -33,5 +35,6 @@ class HappyrEventTrackerExtension extends Extension
         $listener->replaceArgument(2, $eventMap);
 
         $container->setAlias('happyr.event_tracker.manager', 'happyr.event_tracker.manager.'.$config['manager']);
+        $container->setAlias(EventTrackerManagerInterface::class, 'happyr.event_tracker.manager.'.$config['manager']);
     }
 }

@@ -3,11 +3,13 @@
 namespace Happyr\EventTrackerBundle\Twig;
 
 use Happyr\EventTrackerBundle\Manager\EventTrackerManager;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * @author Tobias Nyholm
  */
-class EventTrackerExtension extends \Twig_Extension
+class EventTrackerExtension extends AbstractExtension
 {
     /**
      * @var EventTrackerManager etm
@@ -28,9 +30,9 @@ class EventTrackerExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('createdBy', array($this->etm, 'getCreatedLog')),
-            new \Twig_SimpleFilter('updatedBy', array($this->etm, 'getUpdatedLog')),
-            new \Twig_SimpleFilter('actionedBy', array($this->etm, 'getLog')),
+            new TwigFilter('createdBy', array($this->etm, 'getCreatedLog')),
+            new TwigFilter('updatedBy', array($this->etm, 'getUpdatedLog')),
+            new TwigFilter('actionedBy', array($this->etm, 'getLog')),
         );
     }
 

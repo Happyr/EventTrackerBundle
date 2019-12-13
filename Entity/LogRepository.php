@@ -16,7 +16,7 @@ class LogRepository extends EntityRepository
      *
      * @return \Happyr\EventTrackerBundle\Entity\Log[]
      */
-    public function getEventsByTarget($namespace, $target, $action = null)
+    public function getEventsByTarget($namespace, $target, $action = null): array
     {
         $criteria = array('namespace' => $namespace, 'target' => $target);
 
@@ -36,7 +36,7 @@ class LogRepository extends EntityRepository
      *
      * @return \Happyr\EventTrackerBundle\Entity\Log[]
      */
-    public function getEventsByUser($user, $namespace = null, $action = null)
+    public function getEventsByUser($user, $namespace = null, $action = null): array
     {
         $criteria = array('user' => $user);
 
