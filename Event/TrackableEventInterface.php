@@ -10,10 +10,10 @@ interface TrackableEventInterface
     /**
      * @return int
      */
-    public function getTargetIdentifier();
+    public function getTargetIdentifier(): int;
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }
