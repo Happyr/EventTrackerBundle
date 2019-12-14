@@ -19,8 +19,10 @@ abstract class EventTrackerManager implements EventTrackerManagerInterface
 
     /**
      * @param mixed $target
+     *
+     * @return EventUserInterface|null
      */
-    public function getCreator($target): ?EventUserInterface
+    public function getCreator($target)
     {
         if (null === $log = $this->getCreatedLog($target)) {
             return null;
