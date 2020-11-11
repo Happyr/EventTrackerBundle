@@ -16,12 +16,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('happyr_event_tracker');
-        // Keep compatibility with symfony/config < 4.2
-        if (!\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->root('happyr_event_tracker');
-        } else {
-            $rootNode = $treeBuilder->getRootNode();
-        }
+        $rootNode = $treeBuilder->getRootNode();
+        
 
         $rootNode->children()
             ->append($this->getEventNode())
@@ -36,8 +32,8 @@ class Configuration implements ConfigurationInterface
      */
     private function getEventNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('events');
+        $treeBuilder = new TreeBuilder('events');
+        $node = $treeBuilder->getRootNode();
         $node
             ->isRequired()
             ->useAttributeAsKey('event')
